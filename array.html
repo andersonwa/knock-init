@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>knockout</title>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	<script type="text/javascript" src="knockout.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>nockout array</h2>
+				<ul data-bind="foreach: userArray1">
+					<li data-bind="text: $data"></li>
+				</ul>
+
+				<h1>Users table</h1>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+						</tr>
+					</thead>
+					<tbody data-bind="foreach: userArray2">
+						<tr>
+							<td data-bind="text: firstName"></td>
+							<td data-bind="text: lastName"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		
+		var userArray1 = ko.observableArray(['Anderson', 'Felipe', 'Jose']);
+
+		var userArray2 = ko.observableArray([
+				{ firstName: 'Anderson', lastName: 'Dario' },
+				{ firstName: 'Jose', lastName: 'Alves' }
+			]);
+
+		ko.applyBindings();
+
+	</script>
+
+</body>
+</html>

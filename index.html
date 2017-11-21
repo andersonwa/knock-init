@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>knockout</title>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	<script type="text/javascript" src="knockout.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Trocando name com click do botao</h2>
+				<p>Welcome <span data-bind="text: firstName"></span></p>
+				<button class="btn btn-primary">Change</button>
+			</div>
+		</div>
+
+
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-12">
+				<h2>Trocando name pela input</h2>
+				<div class="form-group">
+					<input type="text" data-bind="value: firstName, valueUpdate: 'afterkeydown'" class="form-control">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		
+		var myViewModel = {
+			firstName: ko.observable('Anderson')
+		}
+
+		$('button').click(function() {
+			myViewModel.firstName('Dario')
+		})
+
+		myViewModel.firstName.subscribe(function(newValue) {
+			// Sempre que mudar o valor ele entra aqui
+			console.log(newValue);
+		})
+
+		myViewModel.firstName.subscribe(function(oldValue) {
+			// Sempre que mudar o valor ele o valor antigo entra aqui
+			console.log(newValue);
+		}, null, "beforeChange")
+
+		ko.applyBindings(myViewModel);
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>knockout</title>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	<script type="text/javascript" src="knockout.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Adicionar e remover</h2>
+
+				<h1>Users table</h1>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+					<tbody data-bind="foreach: users">
+						<tr>
+							<td data-bind="text: $index"></td>
+							<td data-bind="text: name"></td>
+							<td><a class="btn btn-danger" href="#" data-bind="click: $parent.removeUser">Remover</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<input type="text" class="form-control" id="newUser">
+				<button class="btn btn-primary" data-bind="click: addUser">Adicionar</button>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		
+		function viewModel() {
+			var self = this;
+
+			self.users = ko.observableArray([
+				{ name: 'Anderson' },
+				{ name: 'Jose' }
+			]);
+
+			self.addUser = function() {
+				self.users.push({ name: $('#newUser').val() });
+			}
+
+			self.removeUser = function() {
+				self.users.remove(this);
+			}
+		}
+
+		ko.applyBindings(new viewModel());
+
+	</script>
+
+</body>
+</html>
